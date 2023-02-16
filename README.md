@@ -2,6 +2,7 @@
 Needleman Wunsch Algorithm
 
 ! [BuildStatus] (https://github.com/ < hrscott > /Project3/workflows/Project3/badge.svg?event=push)
+
 NOTE: My implmentation seems to provide a correct alignment, but my alignment score is consistently off by a facotr of the length of the sequence that's being aligned: i.e. if seqB is 10 AA long my score is 10 higher than it should be- I wasn't able to figure out how to fix this. The unit tests that I've provided, which compare my implementation to known implemnetations (Biopython) are accordingly incorrect, I've just commented them out here to show that my github actions is all set up.
 
 # Assignment Overview
@@ -11,9 +12,9 @@ See this [video](https://www.youtube.com/watch?v=NqYY0PJbD3s) for a walk through
 # Assignment Tasks
 ## Coding Assessment
 **Note: All modules you need have already been imported.**
-* [TODO] Complete the `NeedlemanWunsch.align` method found in the align/align.py 
+* [not complete] Complete the `NeedlemanWunsch.align` method found in the align/align.py 
 	* Finish the method for filling in the alignment and gap matrices for Needleman-Wunsch.
-* [TODO] Complete the `NeedlemanWunsch._backtrace` method found in align/align.py
+* [X] Complete the `NeedlemanWunsch._backtrace` method found in align/align.py
   * Use the heuristic you have chosen to implement in the the `NeedlemanWunsch.align` method to implement the backtracing procedure.
 * [X] Complete the `main` function in main.py to 
     1. align all provided species BRD2 sequences to the human BRD2 sequence and print the species in order of most similar to least similar with respect to human BRD2.
