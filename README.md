@@ -1,6 +1,7 @@
 # Project 4
 Needleman Wunsch Algorithm
 
+! [BuildStatus] (https://github.com/ < hrscott > /Project3/workflows/Project3/badge.svg?event=push)
 NOTE: My implmentation seems to provide a correct alignment, but my alignment score is consistently off by a facotr of the length of the sequence that's being aligned: i.e. if seqB is 10 AA long my score is 10 higher than it should be- I wasn't able to figure out how to fix this. The unit tests that I've provided, which compare my implementation to known implemnetations (Biopython) are accordingly incorrect, I've just commented them out here to show that my github actions is all set up.
 
 # Assignment Overview
