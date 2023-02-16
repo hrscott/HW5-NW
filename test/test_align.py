@@ -1,6 +1,7 @@
 import pytest
 from align import NeedlemanWunsch, read_fasta
 import numpy as np
+from Bio import pairwise2
 from Bio.Align import PairwiseAligner
 from Bio.Align import substitution_matrices
 
@@ -47,6 +48,9 @@ def test_nw_alignment():
     #assert np.array_equal(nw._gapB_matrix, biopython_gapB_matrix), "Gap B matrix does not match."
     
     
+
+# not an explicit test, but if the aligned sequences from my implementation match the expected sequences
+# it implies that the _backtrace method in my implementation is working correctly.
 def test_nw_backtrace():
     """
     Test backtracing using test_seq3.fa and test_seq4.fa by
@@ -57,9 +61,20 @@ def test_nw_backtrace():
     seq3, _ = read_fasta("./data/test_seq3.fa")
     seq4, _ = read_fasta("./data/test_seq4.fa")
 
-    nw = NeedlemanWunsch("./substitution_matrices/BLOSUM62.mat", -10.0, -1.0)
-    score, seq3_align, seq4_align = nw.align(seq3, seq4)
-    expected_seq3_aligned = "MAVHQLIRRP"
-    expected_seq4_aligned = "M---QLIRHP"
-    assert seq3_align == expected_seq3_aligned
-    assert seq4_align == expected_seq4_aligned
+    gap_open = -10.0
+    gap_extend = -1.0
+
+    # Running alignment algorithm
+    nw = NeedlemanWunsch("./substitution_matrices/BLOSUM62.mat", gap_open, gap_extend)
+    alignment_score, nw_seqA_align, nw_seqB_align = nw.align(seq3, seq4)
+
+    # Biopython implementation
+    blosum62 = substitution_matrices.load("BLOSUM62")
+    bp_alignment = pairwise2.align.globalds(seq3, seq4, blosum62, -10, -1, one_alignment_only=True)[0]
+    bp_seqA_align = bp_alignment.seqA
+    bp_seqB_align = bp_alignment.seqB
+
+    # Compare aligned sequences from NeedlemanWunsch and Biopython implementations
+    assert bp_seqA_align == nw_seqA_align
+    assert bp_seqB_align == nw_seqB_align
+
